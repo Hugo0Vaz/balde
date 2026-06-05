@@ -51,7 +51,7 @@
             # wasm-pack          # Rust → WASM (uncomment if needed)
 
             # Database (optional — uncomment as needed)
-            postgresql
+            # postgresql
 
             # General dev tools
             pkg-config
@@ -71,17 +71,17 @@
             packages = devTools;
 
             shellHook = ''
-              trap 'pg_ctl stop; echo "PostgreSQL process stopped!"' EXIT
+              # trap 'pg_ctl stop; echo "PostgreSQL process stopped!"' EXIT
 
-              export PGDATA="$PWD/data/pgdata"
+              # export PGDATA="$PWD/data/pgdata"
 
-              if [ ! -d "$PGDATA" ]; then
-                echo "Creating PostgreSQL data directory in $PGDATA"
-                initdb -D $PGDATA --no-locale --encoding=UTF8
-              else
-                echo "To run PostgreSQL run:"
-                echo "pg_ctl -D $PGDATA -l ./data/log_file start"
-              fi
+              # if [ ! -d "$PGDATA" ]; then
+              #   echo "Creating PostgreSQL data directory in $PGDATA"
+              #   initdb -D $PGDATA --no-locale --encoding=UTF8
+              # else
+              #   echo "To run PostgreSQL run:"
+              #   echo "pg_ctl -D $PGDATA -l ./data/log_file start"
+              # fi
 
               export RUST_BACKTRACE=1
               export RUST_LOG=debug
