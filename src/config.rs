@@ -1,14 +1,17 @@
-use std::path::{Path, PathBuf};
+use std::{fs::{canonicalize, read_to_string}, path::{Path, PathBuf}};
 use serde::Deserialize;
+use toml::from_str;
 use std::collections::HashMap;
 
 #[derive(Debug, Deserialize)]
+#[allow(dead_code)]
 pub struct Config {
     bucket: BucketConfig,
     baldes: HashMap<String, Balde>,
 }
 
 #[derive(Debug, Deserialize)]
+#[allow(dead_code)]
 pub struct BucketConfig {
     name: String,
     region: String,
@@ -18,15 +21,17 @@ pub struct BucketConfig {
 }
 
 #[derive(Debug, Deserialize)]
+#[allow(dead_code)]
 pub struct Balde {
     name: String,
-    path: PathBuf,
     #[serde(default)]
     filter: Vec<String>,
+    path: PathBuf,
 }
 
 pub fn load_config(path: impl AsRef<Path>) -> Result<Config, Box<dyn std::error::Error>> {
-    let content = std::fs::read_to_string(path)?;
-    let config: Config = toml::from_str(&content)?;
+    let abs_path: PathBuf = canonicalize(path)?;
+    let content = read_to_string(abs_path)?;
+    let config: Config = from_str(&content)?;
     Ok(config)
 }
