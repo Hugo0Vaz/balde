@@ -1,4 +1,6 @@
+
+mod config;
+
 fn main() {
-    println!("Hello, world!");
-    println!("Hello, Test!");
+    let config = config::load_config("./../balde.toml")?;
 }

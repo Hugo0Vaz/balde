@@ -1,0 +1,15 @@
+[bucket]
+name = "meu balde"
+region = "us-west-2"
+url = "https://bucket.address.com/bucket"
+key_id = "YOUR_B2_APPLICATION_KEY_ID"
+key = "YOUR_B2_APPLICATION_KEY"
+
+[baldes.obsdian]
+name = "obsdian vault"
+path = "~/obsidian-vault/"
+
+[baldes.projects]
+name = "projects"
+path = "~/Projetos"
+filter = [ "node_modules", ".git", "vendor", "target" ]
