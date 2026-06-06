@@ -3,13 +3,13 @@ use serde::Deserialize;
 use std::collections::HashMap;
 
 #[derive(Debug, Deserialize)]
-struct Config {
+pub struct Config {
     bucket: BucketConfig,
     baldes: HashMap<String, Balde>,
 }
 
 #[derive(Debug, Deserialize)]
-struct BucketConfig {
+pub struct BucketConfig {
     name: String,
     region: String,
     url: String,
@@ -18,7 +18,7 @@ struct BucketConfig {
 }
 
 #[derive(Debug, Deserialize)]
-struct Balde {
+pub struct Balde {
     name: String,
     path: PathBuf,
     #[serde(default)]
