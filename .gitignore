@@ -22,3 +22,8 @@ target
 
 .direnv
 data/
+
+
+# Added by cargo
+
+/target
