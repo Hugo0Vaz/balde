@@ -6,15 +6,8 @@ key_id = "YOUR_B2_APPLICATION_KEY_ID"
 key = "YOUR_B2_APPLICATION_KEY"
 
 [log]
-level = "debug"
+level = "Debug"
 path = "/var/log/balde"
-
-################################################################################
-#
-#   As configurações dos baldes são necessárias em um arquivo de configuração
-#   elas não podem ser passadas através da CLI.
-#
-################################################################################
 
 [baldes.obsdian]
 name = "obsdian vault"
