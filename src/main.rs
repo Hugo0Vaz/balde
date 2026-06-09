@@ -1,22 +1,10 @@
-use std::{path::PathBuf, process::exit};
-
-use clap::Parser;
+use std::process::exit;
 
 mod config;
 mod log;
-mod cli;
-
-use cli::CliConfig;
 
 fn main() {
-    let cli_config = CliConfig::parse();
-
-    let config_path = match cli_config.balde_config_file {
-        Some(path) => path,
-        None => PathBuf::from("~/.config/balde/balde.toml"),
-    };
-
-    let config = match config::load_config(config_path) {
+    let config = match config::load_config() {
         Ok(config) => config,
         Err(_e) => {
             println!("It was not possible to load the config with error: {}", _e);
@@ -24,8 +12,22 @@ fn main() {
         },
     };
 
-    println!("Config loaded: {:?}", config);
-    //
-    // 3. Inicia o loop de sincronização dos arquivos
-    println!("Baldeee");
+    println!("Debug mode is set to {}", config.debug);
+    println!("We're logging to {:?}", config.log_path);
+    println!("LogLevel is set to: {:?}", config.log_level);
+    println!("The bucket url is: {}", config.bucket_url);
+    println!("With bucket key: {}", config.bucket_key);
+    println!("Bucket on region: {}", config.bucket_region);
+    println!("The bucket id is: {}", config.bucket_key_id);
+    println!("Bucket name is: {}", config.bucket_name);
+
+    for balde in config.baldes {
+        let id = balde.0;
+        let b = balde.1;
+
+        let name = b.name;
+        let filter = b.filter;
+        let path = b.path;
+        println!("  Pretty Name: {}\n  ID: {}\n  Path: {:?}\n  Filter: {:?}", name, id,path, filter);
+    }
 }
